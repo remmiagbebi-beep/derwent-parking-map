@@ -9,16 +9,6 @@
     html, body { margin:0; height:100%; width:100%; background:#000; }
     #map { position:absolute; inset:0; }
 
-    .parking-marker {
-      width: 18px;
-      height: 18px;
-      background: #EC2629;
-      border-radius: 50%;
-      box-shadow: 0 0 0 2px #fff;
-      cursor: pointer;
-    }
-
-    /* Remove black outline / focus box on links */
     a,
     a:focus,
     a:active,
@@ -69,17 +59,17 @@
     const markers = [];
 
     carParks.forEach((p) => {
-      const el = document.createElement("div");
-      el.className = "parking-marker";
-
       const popup = new mapboxgl.Popup({ offset: 16 }).setHTML(popupHtml(p.name, p.coords));
 
-      const marker = new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker({
+        color: "#EC2629",
+        scale: 0.9
+      })
         .setLngLat(p.coords)
         .setPopup(popup)
         .addTo(map);
 
-      el.addEventListener("click", () => {
+      marker.getElement().addEventListener("click", () => {
         map.flyTo({ center: p.coords, zoom: 15, essential: true });
       });
 

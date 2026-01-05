@@ -22,26 +22,39 @@
 
     #map { position: absolute; inset: 0; }
 
-    /* Increase popup padding by 5px */
+    /* Popup styling */
     .mapboxgl-popup-content {
       padding: 15px;
+      border-radius: 20px;
     }
 
-    /* Link styling inside popup */
-    .mapboxgl-popup-content a,
-    .mapboxgl-popup-content a:link,
-    .mapboxgl-popup-content a:visited,
-    .mapboxgl-popup-content a:hover,
-    .mapboxgl-popup-content a:active,
-    .mapboxgl-popup-content a:focus,
-    .mapboxgl-popup-content a:focus-visible {
+    .mapboxgl-popup-tip {
+      display: none;
+    }
+
+    /* Directions link */
+    .mapboxgl-popup-content a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #3899EC;
+      text-decoration: none;
       outline: none !important;
       box-shadow: none !important;
       border: none !important;
-      text-decoration: underline;
-      color: #3899EC;
-      font-size: 12px;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Marker icon before Directions (forced blue) */
+    .directions-icon {
+      width: 14px;
+      height: 14px;
+      background-color: #3899EC;
+      mask: url("icons/marker-svgrepo-com.svg") no-repeat center;
+      -webkit-mask: url("icons/marker-svgrepo-com.svg") no-repeat center;
+      mask-size: contain;
+      -webkit-mask-size: contain;
+      display: inline-block;
     }
   </style>
 </head>
@@ -76,6 +89,7 @@
           <div style="margin-bottom:6px;font-weight:600">${name}</div>
           <a target="_blank" rel="noopener"
              href="https://www.google.com/maps/dir/?api=1&destination=${coords[1]},${coords[0]}">
+            <span class="directions-icon"></span>
             Directions
           </a>
         </div>
